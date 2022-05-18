@@ -10,6 +10,7 @@
 // })
 import request from 'request';
 import { accessKey } from './accessKey.js';
+import chalk from 'chalk';
 const url =
   'http://api.weatherstack.com/current?access_key=' +
   accessKey +
@@ -26,7 +27,7 @@ request({ url: url, json: true }, (error, response) => {
   if (error) {
     console.log('Error occurred: ' + error);
   } else if (response.body.success === false) {
-    console.log('Error occurred: ' + response.body.error.info);
+    console.log(chalk.bold.red('Error occurred: ' + response.body.error.info));
   } else if (response.body.success !== false) {
     console.log(
       response.body.location.name +
