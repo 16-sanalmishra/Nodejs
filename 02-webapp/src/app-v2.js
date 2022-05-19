@@ -1,12 +1,15 @@
-const path = require('path');
-const express = require('express');
-const hbs = require('hbs');
+import path from 'path';
+import express from 'express';
+import hbs from 'hbs';
+import getWeatherData from './utils/getWeatherData.js';
 
 const app = express();
 
-const publicDirectoryPath = path.join(__dirname, '../public');
-const viewsPath = path.join(__dirname, '../templates/views');
-const partialsPath = path.join(__dirname, '../templates/partials');
+const dirname = 'C:\\javafsd\\nodejsdemos\\02-webapp\\src';
+
+const publicDirectoryPath = path.join(dirname, '../public');
+const viewsPath = path.join(dirname, '../templates/views');
+const partialsPath = path.join(dirname, '../templates/partials');
 
 // console.log(publicDirectoryPath);
 app.set('view engine', 'hbs');
@@ -38,31 +41,29 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
-if(!req.query.address){
-  res.send({
-    error: 'You must provide address'
-  })
-}
-
-
+  if (!req.query.city) {
+    return res.send({
+      error: 'You must provide a city !',
+    });
+  }
+  getWeatherData(req.query.city);
   res.send({
     forecast: 'It is cloudy',
-    location: 'Chennai',
-    address : req.query.address
+    city: req.query.city,
   });
 });
-app.get('/product', (req, res) => {
-  if(!req.query.search){
-    res.send({
-      error: 'You must provide product'
-    })
-  }
-  
-  
-    res.send({
-      product:[]
+
+app.get('/products', (req, res) => {
+  if (!req.query.search) {
+    return res.send({
+      error: 'you must provide a search term',
     });
+  }
+  console.log(req.query.search);
+  res.send({
+    products: [],
   });
+});
 
 app.get('/help/*', (req, res) => {
   res.render('404', {
