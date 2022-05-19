@@ -21,21 +21,21 @@ app.use(express.static(publicDirectoryPath));
 app.get('', (req, res) => {
   res.render('index', {
     title: 'Weather Report',
-    name: 'John Doe',
+    name: 'Sanal Mishra',
   });
 });
 
 app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About Us Dynamic',
-    name: 'RK',
+    name: 'Sanal Mishra',
   });
 });
 
 app.get('/help', (req, res) => {
   res.render('help', {
     title: 'Help Page',
-    name: 'RK',
+    name: 'Sanal Mishra',
     helpText: 'Welcome to the product support page',
   });
 });
@@ -51,7 +51,7 @@ app.get('/weather', (req, res) => {
       title: 'Weather Report',
       city: req.query.city,
       weatherInfo: data,
-      name: 'John Doe',
+      name: 'Sanal Mishra',
     });
   });
 });
