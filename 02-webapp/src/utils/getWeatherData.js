@@ -1,22 +1,20 @@
 import request from 'request';
 import { accessKey } from './accessKey.js';
 
-export default function getWeatherData(city) {
+export default function getWeatherData(city, callback) {
   const url =
     'http://api.weatherstack.com/current?access_key=' +
     accessKey +
     '&query=' +
     city;
 
-  console.log(url);
-
   request({ url: url, json: true }, (error, response) => {
     if (error) {
-      console.log('Error occurred: ' + error);
+      callback('Error occurred: ' + error);
     } else if (response.body.success === false) {
-      console.log('Error occurred: ' + response.body.error.info);
+      callback('Error occurred: ' + response.body.error.info);
     } else if (response.body.success !== false) {
-      console.log(
+      callback(
         response.body.location.name +
           ', ' +
           response.body.location.country +

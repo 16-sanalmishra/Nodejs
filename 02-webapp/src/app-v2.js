@@ -5,7 +5,7 @@ import getWeatherData from './utils/getWeatherData.js';
 
 const app = express();
 
-const dirname = 'C:\\javafsd\\nodejsdemos\\02-webapp\\src';
+const dirname = 'C:\\Users\\sanamishra\\FrontEnd\\Nodejs\\02-webapp\\src';
 
 const publicDirectoryPath = path.join(dirname, '../public');
 const viewsPath = path.join(dirname, '../templates/views');
@@ -46,10 +46,13 @@ app.get('/weather', (req, res) => {
       error: 'You must provide a city !',
     });
   }
-  getWeatherData(req.query.city);
-  res.send({
-    forecast: 'It is cloudy',
-    city: req.query.city,
+  getWeatherData(req.query.city, (data) => {
+    res.render('', {
+      title: 'Weather Report',
+      city: req.query.city,
+      weatherInfo: data,
+      name: 'John Doe',
+    });
   });
 });
 
