@@ -60,7 +60,7 @@ app.get('/product', (req, res) => {
   
   
     res.send({
-      product:req.query.search
+      product:[]
     });
   });
 
