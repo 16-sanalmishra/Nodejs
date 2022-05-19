@@ -38,11 +38,31 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
+if(!req.query.address){
+  res.send({
+    error: 'You must provide address'
+  })
+}
+
+
   res.send({
     forecast: 'It is cloudy',
     location: 'Chennai',
+    address : req.query.address
   });
 });
+app.get('/product', (req, res) => {
+  if(!req.query.search){
+    res.send({
+      error: 'You must provide product'
+    })
+  }
+  
+  
+    res.send({
+      product:req.query.search
+    });
+  });
 
 app.get('/help/*', (req, res) => {
   res.render('404', {
